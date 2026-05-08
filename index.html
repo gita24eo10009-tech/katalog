@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GABOL XR - AR Product Viewer</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <h2>⚡ GABOL 3D Store</h2>
+  <nav>
+    <a href="#">Beranda</a>
+    <a href="#katalog">Katalog</a>
+    <a href="#">AR Demo</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="hero-text">
+    <h1>
+      Visualisasikan Produk<br>
+      <span>Dalam Dunia Nyata</span>
+    </h1>
+    <p>Platform AR untuk menampilkan produk 3D secara real-time</p>
+    <button class="btn" onclick="startAR()">Start AR</button>
+  </div>
+
+  <!-- ✅ SLIDER GAMBAR -->
+  <div class="slider">
+    <div class="slides">
+      <img src="gambar/slide1.jpeg">
+      <img src="gambar/slide2.jpeg">
+      <img src="gambar/slide3.jpeg">
+    </div>
+  </div>
+
+</section>
+
+<section class="products" id="katalog">
+  <h2>Katalog Produk</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="gambar/camera.jfif">
+      <h3>Camera</h3>
+      <p>Rp 250.000</p>
+      <button onclick="openAR('camera')">Lihat di AR</button>
+    </div>
+
+    <div class="card">
+      <img src="gambar/laptop.jpeg">
+      <h3>Laptop</h3>
+      <p>Rp 1.500.000</p>
+      <button onclick="openAR('laptop')">Lihat di AR</button>
+    </div>
+
+    <div class="card">
+      <img src="gambar/pc wevb.jpeg"> <!-- ✅ FIX nama file -->
+      <h3>PC Gaming</h3>
+      <p>Rp 15.000.000</p>
+      <button onclick="openAR('pc')">Lihat di AR</button>
+    </div>
+
+  </div>
+</section>
+
+<audio id="clickSound" src="suara.wav"></audio>
+
+<!-- ✅ PAKAI SCRIPT EKSTERNAL -->
+<script src="script.js"></script>
+
+</body>
+</html>

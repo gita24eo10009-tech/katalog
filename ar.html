@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Project - Gita</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+    .ui { position: fixed; top: 20px; left: 20px; z-index: 100; }
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(59, 130, 246, 0.8);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ui">
+    <button onclick="back()">⬅ Kembali</button>
+  </div>
+
+  <a-scene 
+    mindar-image="imageTargetSrc: targets1.mind;" 
+    color-space="sRGB" 
+    renderer="colorManagement: true, physicallyCorrectLights" 
+    vr-mode-ui="enabled: false" 
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="modelCamera" src="3d/camera.glb"></a-asset-item>
+      <a-asset-item id="modelLaptop" src="3d/laptop.glb"></a-asset-item>
+      <a-asset-item id="modelPC" src="3d/pc.glb"></a-asset-item>
+      <audio id="sound1" src="suara.wav" preload="auto"></audio>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model src="#modelCamera" scale="0.3 0.3 0.3" rotation="0 0 0" position="0 0 0"></a-gltf-model>
+      <a-entity sound="src: #sound1"></a-entity>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 1">
+      <a-gltf-model src="#modelLaptop" scale="0.3 0.3 0.3" rotation="0 0 0" position="0 0 0"></a-gltf-model>
+      <a-entity sound="src: #sound1"></a-entity>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 2">
+      <a-gltf-model src="#modelPC" scale="0.3 0.3 0.3" rotation="0 0 0" position="0 0 0"></a-gltf-model>
+      <a-entity sound="src: #sound1"></a-entity>
+    </a-entity>
+
+  </a-scene>
+
+  <script>
+    function back(){
+      window.location.href="index.html";
+    }
+
+    document.querySelectorAll('[mindar-image-target]').forEach((marker) => {
+      marker.addEventListener("targetFound", () => {
+        const sound = marker.querySelector('[sound]');
+        if(sound) {
+          sound.components.sound.playSound();
+        }
+      });
+      
+      marker.addEventListener("targetLost", () => {
+        const sound = marker.querySelector('[sound]');
+        if(sound) {
+          sound.components.sound.stopSound();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
